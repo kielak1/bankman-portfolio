@@ -266,6 +266,12 @@ canvas {
   gap: 8px;
 }
 
+.brief-dialog .brief-audio {
+  color: #dfff4f;
+  border-color: #dfff4f;
+  background: transparent;
+}
+
 .brief-header {
   display: flex;
   align-items: flex-start;

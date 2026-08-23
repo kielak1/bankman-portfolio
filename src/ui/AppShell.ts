@@ -23,6 +23,8 @@ export class AppShell {
   private readonly retryButton: HTMLButtonElement;
   private readonly homeButton: HTMLButtonElement;
   private readonly briefDialog: HTMLDialogElement;
+  private readonly briefAudioButton: HTMLButtonElement;
+  private readonly briefAudio: HTMLAudioElement;
   private currentResult: GameFinishedDetail | null = null;
   private screen: Screen = 'start';
   private gameReady = false;
@@ -64,6 +66,7 @@ export class AppShell {
         </div>
       </main>
       <dialog class="brief-dialog">
+        <audio class="brief-soundtrack" src="/audio/mission-brief.mp3" preload="auto" loop></audio>
         <header class="brief-header">
           <div>
             <p class="app-kicker">CONFIDENTIAL // OPERATIONS HANDBOOK</p>
@@ -71,6 +74,7 @@ export class AppShell {
             <p>Your shift has started badly, which means it has started normally.</p>
           </div>
           <div class="brief-header-actions">
+            <button type="button" class="brief-audio" data-action="toggle-brief-audio">AUDIO ON</button>
             <button type="button" class="dialog-close" data-action="close-info">CLOSE</button>
           </div>
         </header>
@@ -165,6 +169,10 @@ export class AppShell {
     this.retryButton = this.requireElement<HTMLButtonElement>('[data-action="retry"]');
     this.homeButton = this.requireElement<HTMLButtonElement>('[data-action="home"]');
     this.briefDialog = this.requireElement<HTMLDialogElement>('.brief-dialog');
+    this.briefAudioButton = this.requireElement<HTMLButtonElement>('[data-action="toggle-brief-audio"]');
+    this.briefAudio = this.requireElement<HTMLAudioElement>('.brief-soundtrack');
+    this.briefAudio.loop = true;
+    this.briefAudio.volume = 0.22;
 
     this.nickname.value = this.globalScores.getPlayerName();
     this.nickname.addEventListener('change', () => {
@@ -176,10 +184,14 @@ export class AppShell {
     this.homeButton.addEventListener('click', () => this.showStart());
     this.requireElement<HTMLButtonElement>('[data-action="info"]').addEventListener('click', () => {
       this.briefDialog.showModal();
+      this.playBriefAudio();
     });
     this.requireElement<HTMLButtonElement>('[data-action="close-info"]').addEventListener('click', () => {
       this.briefDialog.close();
     });
+    this.briefAudioButton.addEventListener('click', () => this.toggleBriefAudio());
+    this.briefDialog.addEventListener('close', () => this.stopBriefAudio());
+    this.briefDialog.addEventListener('cancel', () => this.stopBriefAudio());
     window.addEventListener(GAME_READY_EVENT, this.onReady);
     window.addEventListener(GAME_FINISHED_EVENT, this.onFinished as EventListener);
     window.addEventListener('keydown', this.onKeyDown);
@@ -240,10 +252,33 @@ export class AppShell {
   }
 
   private startGame(): void {
+    this.stopBriefAudio();
     this.nickname.value = this.globalScores.setPlayerName(this.nickname.value);
     this.root.classList.remove('is-visible');
     this.game.scene.stop(SCENE_KEYS.main);
     this.game.scene.start(SCENE_KEYS.main);
+  }
+
+  private playBriefAudio(): void {
+    this.briefAudioButton.textContent = 'AUDIO ON';
+    void this.briefAudio.play().catch(() => {
+      this.briefAudioButton.textContent = 'AUDIO OFF';
+    });
+  }
+
+  private stopBriefAudio(): void {
+    this.briefAudio.pause();
+    this.briefAudio.currentTime = 0;
+  }
+
+  private toggleBriefAudio(): void {
+    if (this.briefAudio.paused) {
+      this.playBriefAudio();
+      return;
+    }
+
+    this.briefAudio.pause();
+    this.briefAudioButton.textContent = 'AUDIO OFF';
   }
 
   private async saveScore(): Promise<void> {
