@@ -1,0 +1,35 @@
+{
+  "name": "bankman",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A neon corporate-IT arcade game built with Phaser, TypeScript, Vite, Vercel Functions, and Upstash Redis.",
+  "author": "Tadeusz Kielak",
+  "license": "UNLICENSED",
+  "homepage": "https://bankman.kielak.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kielak1/bankman-portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kielak1/bankman-portfolio/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "leaderboard:clear": "node --env-file=.env.local scripts/clear-leaderboard.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.38.0",
+    "phaser": "^4.1.0"
+  }
+}
