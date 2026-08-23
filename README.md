@@ -8,7 +8,7 @@
 
 BankMan reimagines maze-chase gameplay as a stressful shift in enterprise IT. The player moves through a cyber-styled office, collects 16 tickets, manages a rising stress level, and avoids four enemies with distinct movement and contact effects.
 
-This repository is a sanitized portfolio edition. It contains the complete application code and a presentation-safe game map, but excludes private source materials, internal documentation, credentials, and third-party audio with unclear redistribution rights.
+This repository is a sanitized portfolio edition. It contains the complete application code and presentation-safe runtime assets, but excludes private source materials, internal documentation, credentials, and third-party assets with unclear redistribution rights.
 
 ## What this project demonstrates
 
@@ -140,7 +140,9 @@ public/                 public web assets
 - GitHub Actions receives read-only repository contents permission.
 - Dependency updates are monitored by Dependabot.
 - Secrets, Vercel metadata, local environment files, source references, and private documentation are excluded.
-- The public portfolio edition uses procedural Web Audio effects and does not redistribute the original Mission Brief soundtrack.
+- Gameplay effects are generated with Web Audio, while Mission Brief uses a synthetic cash-register soundscape created for this project.
+- The soundtrack contains no samples or copied audio from commercial recordings.
+- Asset provenance is documented in [ASSET_CREDITS.md](ASSET_CREDITS.md).
 
 Known limitations:
 
