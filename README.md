@@ -1,5 +1,7 @@
 # BankMan
 
+[![CI](https://github.com/kielak1/bankman-portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/kielak1/bankman-portfolio/actions/workflows/ci.yml)
+
 > A neon corporate-IT arcade game about resolving tickets, protecting the SLA, and surviving one more “quick call.”
 
 [Play the live demo](https://bankman.kielak.com) · [Report an issue](https://github.com/kielak1/bankman-portfolio/issues)
@@ -133,6 +135,17 @@ src/ui/                 application shell, HUD, overlays, and touch controls
 src/assets/maps/        presentation-safe runtime map
 public/                 public web assets
 ```
+
+## Delivery pipeline
+
+Every production change follows the same protected path:
+
+1. Work is pushed to a feature branch and opened as a pull request.
+2. GitHub Actions installs the locked dependencies, type-checks the project, and builds the production bundle.
+3. The protected `main` branch accepts the change only after the required `build` check passes.
+4. Vercel deploys the merged commit to [bankman.kielak.com](https://bankman.kielak.com).
+
+Preview deployments are used to verify the frontend, serverless API, and static assets before a production merge. Environment-specific Redis keys keep preview and production leaderboards isolated.
 
 ## Quality and security
 
