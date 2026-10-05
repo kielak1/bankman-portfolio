@@ -90,8 +90,8 @@ The client remains playable when the leaderboard API is unavailable. Completed s
 
 ### Requirements
 
-- Node.js 24 LTS (see `.nvmrc`)
-- npm
+- Node.js 24.21.0 LTS (see `.nvmrc`)
+- npm 12.2.0 (see `packageManager` in `package.json`)
 
 Install dependencies and start the frontend:
 
