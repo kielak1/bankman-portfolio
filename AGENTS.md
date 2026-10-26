@@ -33,3 +33,13 @@ When the user sends exactly `bankman` (case-insensitive) in a Codex session star
 - Never delete production data, reset leaderboards, access production secrets, or trigger production deployment without a separately approved Issue/dispatch.
 
 For authoritative status transitions, report format, and the dispatch contract, see `docs/CODEX_WORKFLOW.md`.
+
+## Routine maintenance: Dependabot, CI and Vercel
+
+Read `docs/MAINTENANCE.md` for triage and dependency policy. Routine Dependabot/Vercel notifications are **not** dispatches; do not start work, send an email, merge PRs or deploy based on a bot comment.
+
+- `Superseded by #NN` is informational: inspect the newer PR; never execute both.
+- Vercel `Ready / Preview` reports a successful **preview** deployment, not a production release.
+- Use the weekly review to separate informational events, ordinary maintenance and security/CI/production issues needing prompt attention.
+- Keep `@types/node` aligned with the Node.js 24 runtime until an explicitly approved major runtime migration.
+- Codex may carry out dependency/PR housekeeping only under an approved dispatch, and may not merge/deploy unless separately authorized.
