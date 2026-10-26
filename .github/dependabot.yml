@@ -5,6 +5,11 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    # The application, local development and CI run on Node.js 24.
+    # Keep @types/node on that major until the runtime migration is approved.
+    ignore:
+      - dependency-name: "@types/node"
+        versions: [">=25"]
 
   - package-ecosystem: github-actions
     directory: /
