@@ -89,3 +89,11 @@ Email is not a second task channel; replies do not authorize execution.
 - No PKO package exchange, bank-side scripts, code installation, bank approvals, bank infrastructure access, or bank endpoints.
 - No production secrets, destructive leaderboard operations, schema/data erasure, or service configuration changes without separate explicit owner approval.
 - Keep scope narrow; choose reversible code modifications; do not conceal a failed prerequisite.
+
+## Maintenance and automated notifications
+
+The normative maintenance procedure is `docs/MAINTENANCE.md`. ChatGPT may prepare a **read-only** GitHub weekly status summary without an execution dispatch. Reviewing Dependabot PRs, CI, and Vercel metadata must not be conflated with authorization to change any code or close an Issue.
+
+When the owner approves a maintenance sweep, ChatGPT opens a scoped Issue and replaces the **completed** (reported/blocked/idle) `codex-control:.codex/TASK.md` with a new unique `approved` dispatch. Never overwrite a `claimed` dispatch. Codex runs it only after the owner enters `bankman`, performs the approved steps, reports to the Issue and sends the usual completion email.
+
+Routine Dependabot supersession notices and successful Vercel previews are informational: no new Issue or outbound Codex email is required. Failed CI, failed production deployments and confirmed applicable security advisories require priority triage, but still do not authorize unsupervised production operations.
